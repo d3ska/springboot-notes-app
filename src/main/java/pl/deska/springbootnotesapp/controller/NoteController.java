@@ -42,9 +42,9 @@ public class NoteController {
 
     @PostMapping("/search")
     public String search(@ModelAttribute Note note, Model model) {
-        Optional<Note> optionalNote = noteRepo.findNoteByTitleContaining(note.getTitle());
-        if (optionalNote.isPresent()) {
-            model.addAttribute("notes", Collections.singleton(optionalNote.get()));
+        Optional<Note> searchingNote = noteRepo.findNoteByTitleContaining(note.getTitle());
+        if (searchingNote.isPresent()) {
+            model.addAttribute("notes", Collections.singleton(searchingNote.get()));
         } else {
             message = "There is no note with title " + note.getTitle();
             model.addAttribute("message", message);
